@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttle Example</title>
+  </head>
+  <body>
+    <button id="myButton">Click me</button>
+    <script>
+      // Simple throttle function
+      function throttle(func, delay) {
+        let lastCall = 0;
+        return function () {
+          const now = Date.now();
+          if (now - lastCall >= delay) {
+            lastCall = now;
+            func();
+          }
+        };
+      }
+
+      // Function to be throttled
+      function handleClick() {
+        console.log("Button clicked");
+      }
+
+      // Get the button element
+      const button = document.getElementById("myButton");
+
+      // Add event listener with throttling
+      button.addEventListener("click", throttle(handleClick, 1000));
+    </script>
+  </body>
+</html>

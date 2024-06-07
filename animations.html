@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+            animation-name: screensaver;
+            animation-duration: 4s;
+            position: relative;
+            /*animation-iteration-count: infinite;
+            animation-direction: reverse;
+            
+            animation-timing-function: linear;*/
+            
+            animation-delay: 4s;
+            animation-fill-mode: forwards;
+        }
+        @keyframes screensaver{
+            0% {background-color: blue;top: 0;left: 0;}
+            25%{background-color: green;top: 0px;left: 250px;}
+            50%{background-color: black;top: 250px;left: 250px;}
+            75%{background-color: brown;top: 250px;left: 0;}
+            100%{background-color: aqua;top: 0px;left: 0px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="item"></div>
+</body>
+</html>

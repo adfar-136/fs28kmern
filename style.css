@@ -1,0 +1,76 @@
+/* /* h1{
+    color: red;
+    background-color: aqua;
+}
+#heading{
+    color: blue;
+}
+.main{
+    color: green;
+}
+div > p{
+    color: red;
+}
+div + P{
+    background-color: red;
+}
+div ~ p{
+    border: 2px solid red;
+}
+
+h1:hover{
+    background-color: blue;
+}
+a:link{
+    color: red;
+}
+a:visited{
+    color: blue;
+}
+a:hover{
+    color: aqua;
+}
+a:active{
+    color: black;
+}
+
+div > p:first-child{
+    color: red;
+}
+div > p:first-of-type{
+    color: blue;
+}
+p:last-child{
+    background-color: aqua;
+}
+p:last-of-type{
+    background-color: red;
+} 
+p:nth-child(2n+1){
+    background-color: red;
+}*/
+
+p::first-letter{
+    color: red;
+    font-size: 30px;
+    background-color: yellow;
+}
+p::first-line{
+    color: red;
+    font-size: 30px;
+    background-color: yellow;
+}
+h1::before{
+    content: "❤️";
+}
+h1::after{
+    content: "❤️";
+}
+::selection{
+    color: red;
+    background-color: yellow;
+}
+
+::marker{
+    color: red;
+}

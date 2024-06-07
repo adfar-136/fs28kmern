@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            background-color: cadetblue;
+            padding: 20px;
+            display: grid;
+            gap: 10px;
+            grid-template-areas: "header header header header header"
+            "sidebar sidebar main main main"
+            "footer footer footer footer footer";
+        }
+        .container > div{
+            padding: 20px;
+            background-color: aqua;
+
+        }
+        
+        .item2{
+            grid-area: sidebar;
+        }
+        .item3{
+            grid-area: main;
+        }
+        .item4{
+            grid-area: footer;
+        }
+        .item1{
+            grid-area: header;
+            background-color: burlywood;
+            border: 2px solid red;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .item1 > div{
+            background-color: brown;
+            margin: 3px;
+            padding: 10px;
+        }
+        .links{
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item1">
+            <div>logo</div>
+            <div class="links">
+                <div>Home</div>
+                <div>About</div>
+                <div>Blog</div>
+                <div>Contact</div>
+            </div>
+            <div>search</div>
+        </div>
+        <div class="item2">content1</div>
+        <div class="item3">content1</div>
+        <div class="item4">content1</div>
+    </div>
+</body>
+</html>
