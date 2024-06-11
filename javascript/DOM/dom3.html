@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <button onclick="fun()">Add</button>
+ <ul id="list">
+    
+ </ul>
+ <script>
+    function fun(){
+       let input = document.getElementById("input")
+       let listItem =document.createElement("li")
+       listItem.innerHTML = input.value;
+       let ulist =document.getElementById("list");
+       ulist.appendChild(listItem)
+       input.value = ""
+    }
+ </script>
+</body>
+</html>
