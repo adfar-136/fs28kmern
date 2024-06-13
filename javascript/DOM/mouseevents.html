@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="para" ondblclick="fun()">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+      necessitatibus veniam esse iusto voluptatum, soluta beatae voluptate,
+      cumque tempora rerum quae labore velit porro quia minus eos. Repellendus
+      debitis consequuntur iure facere ducimus, asperiores voluptatem
+      
+    </h1>
+    <form onsubmit="handleSubmit(event)">
+        <input onkeyup="fun(event)" type="text" id="input">
+        <input onchange="fun(event)" type="text" id="input">
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+      function handleSubmit(e){
+        e.preventDefault();
+        console.log("adfar");
+      }
+        function fun(event){
+           console.log(event.target.value);
+           let element = document.getElementById("para");
+           element.style.backgroundColor ="blue"
+        }
+    </script>
+  </body>
+</html>

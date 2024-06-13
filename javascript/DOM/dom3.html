@@ -17,7 +17,16 @@
        let listItem =document.createElement("li")
        listItem.innerHTML = input.value;
        let ulist =document.getElementById("list");
-       ulist.appendChild(listItem)
+       let removeBtn = document.createElement("button");
+       removeBtn.innerHTML = "Remove";
+       removeBtn.style.backgroundColor = "aqua"
+       removeBtn.style.padding = "20px"
+       removeBtn.onclick=()=>{
+         ulist.removeChild(listItem)
+       }
+       listItem.appendChild(removeBtn);
+
+       ulist.appendChild(listItem);
        input.value = ""
     }
  </script>

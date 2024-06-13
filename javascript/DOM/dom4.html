@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JS</li>
+        <li>REact</li>
+    </ul>
+    <button onclick="replace()">Replace</button>
+    <button onclick="remove()">Remove</button>
+    <script>
+        function replace(){
+            let list = document.getElementById("list").children[2];
+            let newnode = document.createTextNode("Mongodb")
+           list.replaceChild(newnode,list.childNodes[0])
+        }
+        function remove(){
+          let list = document.getElementById("list");
+          if(list.hasChildNodes()){
+            list.removeChild(list.firstChild)
+          }
+          /*while(list.hasChildNodes()){
+            list.removeChild(list.firstChild)
+          }
+          if(list.children[2]){
+            list.removeChild(list.children[2])
+          }*/
+        }
+    </script>
+</body>
+</html>

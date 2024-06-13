@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            margin: 0;
+        }
+        #main{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: brown;
+            position: absolute;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- <p id="para" onmousemove="fun(event)">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro dolorum
+      accusantium dolores numquam harum ducimus, perferendis praesentium vero
+      facilis officia quod et sint voluptas odio adipisci eveniet quae. Cumque
+      cupiditate iure nam tempore hic dolores velit asperiores nisi at,
+      recusandae architecto iusto ab eligendi facere explicabo pariatur atque?
+      Excepturi porro deleniti magnam omnis provident, nisi iure architecto
+      consequuntur officiis iusto mollitia sapiente possimus error reiciendis,
+      non culpa beatae quae qui ex voluptas aliquam odit. Deleniti omnis
+      temporibus eveniet earum perferendis delectus unde asperiores, saepe cum
+      praesentium, magnam sequi, tenetur velit ullam eligendi. Autem, deserunt
+      alias culpa optio voluptates dolore dolorem facere porro. Delectus aut,
+      reprehenderit officia cupiditate consequatur sint quam, accusantium
+      mollitia doloribus quasi eum qui in rerum fuga illo soluta et suscipit!
+      Amet alias pariatur qui totam debitis nam nisi ab, odio beatae aperiam
+      officia dolore similique! Excepturi, aperiam nesciunt id illum accusantium
+      beatae eveniet doloremque? Alias distinctio nesciunt odit veritatis,
+      consequuntur velit praesentium ut fugit voluptas, corporis, dolore animi.
+      Soluta cupiditate necessitatibus totam quod vero eius vel voluptate maxime
+      placeat, at, quibusdam cumque nihil laboriosam aliquid repellendus quis
+      impedit, dolor tempore quos ipsum reiciendis fuga sapiente. Dolorem
+      voluptatem corporis magnam quasi eius sit velit, magni non, autem tempore
+      modi asperiores vero maiores quo rerum harum quibusdam corrupti
+      cupiditate. Soluta veritatis qui voluptates inventore quae a harum maxime
+      itaque minus, consequatur autem facilis quos. Dolorem numquam alias
+      deleniti nisi in consectetur accusamus qui, laborum consequuntur veniam
+      explicabo rem eaque perferendis doloribus? Voluptatum eaque quasi in
+      inventore non veniam sequi dolor corrupti fugiat eius alias nesciunt
+      molestias, nihil ut necessitatibus officiis aliquid ad! Doloremque maiores
+      minima fugiat saepe necessitatibus exercitationem quo neque quod ea qui
+      asperiores corporis facilis, architecto sit praesentium excepturi
+      provident pariatur sequi quisquam rem vitae. Ducimus sint quod ratione
+      nemo rerum illum nihil, modi amet quidem voluptatibus!
+    </p> -->
+    <div id="main"></div>
+    <script>
+        /*function fun(event){
+            var x = event.clientX;
+            var y = event.clientY;
+            let element = document.getElementById("para")
+            console.log("x: " +x,"y: " +y);
+            if(x>250 && y>250){
+                element.style.backgroundColor ="pink"
+            } else {
+                element.style.backgroundColor ="blue"
+
+            }
+        }*/
+        document.addEventListener("mousemove",(e)=>{
+            let element = document.getElementById("main");
+            
+            element.style.left=`${e.clientX}px`
+            element.style.top=`${e.clientY}px`
+        })
+    </script>
+  </body>
+</html>

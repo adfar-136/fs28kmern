@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .hide{
+        display: none;
+       }
+       .show{
+        display: block;
+       }
+       .toggle{
+        background-color: red;
+        border-radius: 30px;
+        padding: 30px;
+       }
+    </style>
+</head>
+<body>
+    <h1 id="para" class="para para1 para2" title="heading hain">Good morning</h1>
+    <button id="btn" onclick="show()">Hide</button>
+    <script>
+        let element = document.getElementById("para");
+        let btn = document.getElementById("btn");
+        function show(){
+           // element.setAttribute("title","heading hain");
+           let classes = element.classList;
+           //classes.add("hide")
+          // classes.remove("para")
+           classes.toggle("toggle")
+        }
+        /*function show(){
+           if(element.style.display==="block"){
+            element.style.display="none";
+            btn.innerHTML="Hide";
+           } else {
+            element.style.display="block";
+            btn.innerHTML="Show"
+           } 
+        }*/
+    </script>
+</body>
+</html>
