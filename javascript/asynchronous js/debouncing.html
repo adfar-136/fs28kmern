@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <button>SUbmit</button>
+    <script>
+        let element = document.getElementById("input");
+        function debounce(func,delay){
+            let timeout;
+            return function(){
+                clearTimeout(timeout);
+                timeout = setTimeout(func,delay)
+            }
+
+        }
+        function display(){
+            console.log("hello");
+        }
+        element.addEventListener("keydown",debounce(display,1000))
+    </script>
+</body>
+</html>

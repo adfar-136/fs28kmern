@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Click ME</button>
+    <script>
+        let btn = document.getElementById("btn");
+        function throttle(fun,delay){
+            let lastCall = 0;
+            return function(){
+                let now =Date.now();
+                if(now - lastCall >= delay){
+                    lastCall = now;
+                    fun()
+                }
+            }
+        }
+        function display(){
+            console.log("hello");
+        }
+        btn.addEventListener("click",throttle(display,1000))
+    </script>
+</body>
+</html>

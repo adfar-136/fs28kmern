@@ -24,7 +24,7 @@ document.getElementById("searchForm").addEventListener("submit",(e)=>{
     if(username){
         fetchUserInfo(username)
         fetchUserRepos(username,1)
-        setPagination(username,1)
+   
     }
 })
 function fetchUserRepos(username,page){
@@ -36,13 +36,50 @@ function fetchUserRepos(username,page){
           <div>
             <a href="${repo.html_url}" target="_blank">${repo.name}</a>
             <p>${repo.description || 'no description available'}</p>
+            <i class="fa-heart ${isfavorite(repo.name)?"fa-solid":"fa-regular"}" onclick="toggleFavRepos('${repo.name}','${repo.html_url}','${repo.description}')"></i>
           </div>
          </div>
         `).join("")
         
         document.getElementById("repos").innerHTML =repolist;
-      
+        fetchTotalRepos(username).then(totalRepos=>setPagination(username,page,totalRepos))
     })
+}
+let favoriteRepos= [] || JSON.parse(localStorage.getItem("favRepos"))
+
+function isfavorite(repoName){
+    
+ return favoriteRepos.some(repo=>repo.repoName===repoName)
+}
+function toggleFavRepos(repoName,url,description){
+    let repoIndex = favoriteRepos.findIndex(repo=>repo.repoName===repoName);
+    console.log(repoIndex);
+    if(repoIndex !== -1){
+        favoriteRepos.splice(repoIndex,1)
+    } else {
+        favoriteRepos.push({repoName,url,description})
+    }
+   localStorage.setItem("favRepos",JSON.stringify(favoriteRepos))
+  UpdateRepoIcons()
+  
+}
+function UpdateRepoIcons(){
+    document.querySelectorAll(".repo").forEach(repoDiv=>{
+        let repoName = repoDiv.querySelector("a").textContent;
+        let icon = repoDiv.querySelector(".fa-heart");
+        if(isfavorite(repoName)){
+            icon.classList.add("fa-solid")
+            icon.classList.remove("fa-regular")
+        } else{
+            icon.classList.remove("fa-solid")
+            icon.classList.add("fa-regular")
+        }
+    })
+}
+function fetchTotalRepos(username){
+    return fetch(`https://api.github.com/users/${username}`)
+    .then(result=>result.json())
+    .then(response=>response.public_repos)
 }
 // function setPagination(username,page){
 //     console.log(page)
@@ -52,26 +89,55 @@ function fetchUserRepos(username,page){
 //      <button onclick="fetchUserRepos('${username}',${page+1})">Next</button>
 //     `
 // }
-function setPagination(username,page,totalRepos){
-    totalRepos=66;
+function setPagination(username,currentPage,totalRepos){
+    
     let pagination = document.getElementById("pagination");
-    // let prevBtn = document.createElement("button")
-    // prevBtn.innerHTML= `
-    // <button onclick="fetchUserRepos('${username}',${page-1})" ${page===1?"disabled":""}>Previous</button>
-    // `
-    // document.getElementById("prev").appendChild(prevBtn)
-    let btnCount = Math.ceil(totalRepos/5);
-    for(let i=1;i<=btnCount;i++){
-        let pageBtn = document.createElement("button");
-        pageBtn.textContent = i;
-        pageBtn.onclick = ()=>{
-            fetchUserRepos(username,i)
-        }
-        pagination.appendChild(pageBtn)
+    pagination.innerHTML="";
+    let totalPages = Math.ceil(totalRepos/5);
+    const createButton = (text,currentPage)=>{
+        let button = document.createElement("button");
+        button.textContent = text;
+        button.onclick = ()=>fetchUserRepos(username,currentPage);
+        return button;
     }
-    // let nextBtn = document.createElement("button")
-    // nextBtn.innerHTML= `
-    // <button onclick="fetchUserRepos('${username}',${page+1})">Next</button>
-    // `
-    // document.getElementById("next").appendChild(nextBtn)
+    //previousButton 
+    const prevButton = createButton("prev",currentPage-1)
+    prevButton.disabled = currentPage===1;
+    pagination.appendChild(prevButton)
+
+    const maxBtns =5;
+    let startPage = Math.max(1,currentPage-Math.floor(maxBtns/2));
+    let endPage = Math.min(totalPages,startPage+maxBtns-1);
+    for(let i=startPage;i<=endPage;i++){
+        const pageButton = createButton(i,i);
+        pagination.appendChild(pageButton)
+    }
+    //nextpage
+    const nextButton = createButton("next",currentPage+1)
+    nextButton.disabled = currentPage===totalPages;
+    pagination.appendChild(nextButton)
+
 }
+// function setPagination(username,page,totalRepos){
+//     totalRepos=66;
+//     let pagination = document.getElementById("pagination");
+//     // let prevBtn = document.createElement("button")
+//     // prevBtn.innerHTML= `
+//     // <button onclick="fetchUserRepos('${username}',${page-1})" ${page===1?"disabled":""}>Previous</button>
+//     // `
+//     // document.getElementById("prev").appendChild(prevBtn)
+//     let btnCount = Math.ceil(totalRepos/5);
+//     for(let i=1;i<=btnCount;i++){
+//         let pageBtn = document.createElement("button");
+//         pageBtn.textContent = i;
+//         pageBtn.onclick = ()=>{
+//             fetchUserRepos(username,i)
+//         }
+//         pagination.appendChild(pageBtn)
+//     }
+//     // let nextBtn = document.createElement("button")
+//     // nextBtn.innerHTML= `
+//     // <button onclick="fetchUserRepos('${username}',${page+1})">Next</button>
+//     // `
+//     // document.getElementById("next").appendChild(nextBtn)
+// }
