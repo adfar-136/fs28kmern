@@ -1,0 +1,140 @@
+import React from 'react';
+import About from './components/About'
+import Contact from './components/Contact';
+let myStyle = {
+  color:"red",
+  backgroundColor:"green",
+  padding:"20px",
+  border:"2px solid red"
+}
+function App() {
+  return (
+    <>
+    
+<div>
+  <h1 style={{color:"red",backgroundColor:"aqua"}}>text</h1>
+  <h1 style={myStyle}>text</h1>
+  <h1 style={myStyle}>text</h1>
+  {section}
+  <About/>
+  <About/>
+  <About/>
+ <Contact/>
+
+</div>
+    </>
+    
+  )
+}
+
+
+let section  = <main>
+  <h1>Adfar Rasheed</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, exercitationem?</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, exercitationem?</p>
+</main>
+export default App
+
+
+import React from 'react'
+import News from './components/News'
+// import About from './components/About'
+// import Contact from './components/Contact'
+// let lastName = "RAshid"
+function App() {
+  return (
+    <div>
+       {/* <About firstName="Adfar" age={25} salary ="5000"/>
+       <About firstName="Ankit" age={24} salary ="50000"/>
+       <Contact lastName={lastName}/> */}
+       <News>
+        <div>
+          <h1>I am children div of my News component</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, nam.</p>
+        </div>
+       </News>
+    </div>
+  )
+}
+
+export default App
+
+
+import React from 'react'
+// import Count from './components/Count'
+// import Conditional from './components/Conditional'
+// import Item from "./components/Item"
+function App() {
+  return (
+    <div>
+      {/* <Item fName="Adfar" skills={["HTML","CSS","JS"]} 
+      person={{
+        name:"Adfar",
+        age:25,
+        salary:5000
+      }}/> */}
+      {/* <Conditional allow= {true}/>
+      <Conditional allow= {false}/>
+      <Conditional allow= {true}/> */}
+      {/* <Count/>
+      <Count/> */}
+    </div>
+  )
+}
+
+export default App
+
+import React, { useState } from 'react'
+import "./App.css"
+function App() {
+  console.log("adfar")
+  const [backgroundColor,setBackgroundColor] = useState("black")
+  const [cName,setCName] = useState("black")
+  return (
+    <div>
+      <div className={cName} style={{height:"300px",width:"300px",border:"2px solid red"}}>
+        
+      </div>
+      {/* <button onClick={()=>setBackgroundColor("red")}>Red</button>
+         <button onClick={()=>setBackgroundColor("blue")}>Blue</button>
+         <button onClick={()=>setBackgroundColor("pink")}>Pink</button>
+         <button onClick={()=>setBackgroundColor("green")}>Green</button>
+         <button onClick={()=>setBackgroundColor("aqua")}>Aqua</button> */}
+         <button onClick={()=>setCName("red")}>Red</button>
+         <button onClick={()=>setCName("blue")}>Blue</button>
+         <button onClick={()=>setCName("pink")}>Pink</button>
+         <button onClick={()=>setCName("green")}>Green</button>
+         <button onClick={()=>setCName("aqua")}>Aqua</button>
+    </div>
+  )
+}
+
+export default App
+
+
+//themechanger
+import React, { useState } from 'react'
+
+function App() {
+  const [color,setColor] = useState("white");
+  const [text,setText] =useState("Dark")
+  function handleColor(){
+    if(color === "white"){
+      setColor("black")
+      setText("Light")
+    } else {
+      setColor("white")
+    setText("Dark")
+    }
+  }
+  return (
+    <div>
+      <div style={{height:"100vh",backgroundColor:color,width:"100vw",border:"2px solid red"}}>
+      <button onClick={handleColor}>{text}</button>
+      </div>
+     
+    </div>
+  )
+}
+
+export default App

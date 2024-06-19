@@ -1,20 +1,18 @@
-
+import React, { useState } from 'react'
 
 function App() {
+  const [condition,setCondition] = useState(true)
+  function handleColor(){
+    setCondition(!condition)
+  }
   return (
     <div>
-     <h1>Hello React</h1>
-     <h1>Hello React</h1>
-     <h1>Hello React</h1>
-     <h1>Hello React</h1>
-     <h1>Hello React</h1>
-     {main}
+      <div style={{height:"100vh",backgroundColor:condition?"white":"black",width:"100vw",border:"2px solid red"}}>
+      <button onClick={handleColor}>{condition?"DARK":"LIGHT"}</button>
+      </div>
+     
     </div>
-  );
+  )
 }
-let main = (<main>
-  <h1>App</h1>
-  <h2>HEllo</h2>
-  <p>ugsdhgfh</p>
-</main>)
-export default App;
+
+export default App
