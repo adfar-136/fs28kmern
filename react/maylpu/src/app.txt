@@ -138,3 +138,153 @@ function App() {
 }
 
 export default App
+
+
+//themechanger
+
+import React, { useState } from 'react'
+
+function App() {
+  const [condition,setCondition] = useState(true)
+  function handleColor(){
+    setCondition(!condition)
+  }
+  return (
+    <div>
+      <div style={{height:"100vh",backgroundColor:condition?"white":"black",width:"100vw",border:"2px solid red"}}>
+      <button onClick={handleColor}>{condition?"DARK":"LIGHT"}</button>
+      </div>
+     
+    </div>
+  )
+}
+
+export default App
+
+//map 
+import React from 'react'
+
+function App() {
+  var data = [
+    1,
+    ["a","b","c"],
+    ["D","e","f"],
+    ["g","e","f"],
+    2
+  ]
+  return (
+    <div>
+      {data.map((item,index)=>item.map((item2,index)=><li key={index}>{item2}</li>
+      ))}
+    </div>
+  )
+}
+
+export default App
+
+
+//state batching and state scheduling
+
+import React, { useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0);
+  function handleIncrement(){
+    // setCount(count + 1);
+    // setCount(count + 1);
+    // setCount(count + 1);
+    // setCount(count + 1);
+    // setCount(n=>n+1)
+    // setCount(n=>n+1)
+    // setCount(n=>n+1)
+    setCount(n=>n+1)
+    setCount(count+2)
+  }
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+      <button>Decrement</button>
+    </div>
+  )
+}
+
+//controlled components
+import React, { useState } from 'react'
+
+function App() {
+  const [username,setUsername] = useState("");
+  const [email,setEmail] = useState("")
+  const [pass,setPass] = useState("");
+  const [condition,setCondition] = useState(true)
+  function handleSubmit(e){
+    e.preventDefault()
+    setCondition(!condition)
+  }
+  return (
+    <div>
+      <form>
+        <input type="text" placeholder='Username' value={username}
+        onChange={(e)=>setUsername(e.target.value)}/>
+        <input type="email" placeholder='email' value={email}
+        onChange={(e)=>setEmail(e.target.value)}/>
+        <input type="password" placeholder='password' value={pass}
+        onChange={(e)=>setPass(e.target.value)}/>
+        <br />
+        <button onClick={handleSubmit}>Submit</button>
+      </form>
+      
+      {!condition && (
+        <div>
+          <h1>My username is {username}</h1>
+          <h1>My email is {email}</h1>
+          <h1>My password is {pass}</h1>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default App
+
+//object state
+import React, { useState } from 'react'
+
+function App() {
+   const [input,setInput] = useState({
+    username:"",
+    email:"",
+    pass:""
+   })
+   console.log(input)
+  const [condition,setCondition] = useState(true)
+  function handleSubmit(e){
+    e.preventDefault()
+    setCondition(!condition)
+  }
+  return (
+    <div>
+      <form>
+        <input type="text" placeholder='Username' value={input.username}
+        onChange={(e)=>setInput((prev)=>({...prev,username:e.target.value}))}/>
+        <input type="email" placeholder='email' value={input.email}
+        onChange={(e)=>setInput((prev)=>({...prev,email:e.target.value}))}
+       />
+        <input type="password" placeholder='password' value={input.pass}
+        onChange={(e)=>setInput((prev)=>({...prev,pass:e.target.value}))}/> 
+        <br />
+        <button onClick={handleSubmit}>Submit</button>
+      </form>
+      
+      {/* {!condition && (
+        <div>
+          <h1>My username is {username}</h1>
+          <h1>My email is {email}</h1>
+          <h1>My password is {pass}</h1>
+        </div>
+      )} */}
+    </div>
+  )
+}
+
+export default App

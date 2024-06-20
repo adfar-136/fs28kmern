@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
+import Demo from './components/classbasedcomponents/Demo'
 
-function App() {
-  const [condition,setCondition] = useState(true)
-  function handleColor(){
-    setCondition(!condition)
-  }
+export default function App() {
+  const [color,setColor] =useState("gray")
   return (
     <div>
-      <div style={{height:"100vh",backgroundColor:condition?"white":"black",width:"100vw",border:"2px solid red"}}>
-      <button onClick={handleColor}>{condition?"DARK":"LIGHT"}</button>
-      </div>
-     
+      <Demo fName="Adfar" lname="rashed" color={color}/>
+      <button onClick={()=>setColor("blue")}>blue</button>
+      <button onClick={()=>setColor("orange")}>orange</button>
+      <button onClick={()=>setColor("brown")}>brown</button>
+      <button onClick={()=>setColor("pink")}>pink</button>
     </div>
   )
 }
-
-export default App
