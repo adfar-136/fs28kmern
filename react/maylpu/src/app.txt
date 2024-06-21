@@ -288,3 +288,148 @@ function App() {
 }
 
 export default App
+
+//
+import React, { useState } from 'react'
+import Demo from './components/classbasedcomponents/Demo'
+
+export default function App() {
+  const [color,setColor] =useState("gray")
+  return (
+    <div>
+      <Demo fName="Adfar" lname="rashed" color={color}/>
+      <button onClick={()=>setColor("blue")}>blue</button>
+      <button onClick={()=>setColor("orange")}>orange</button>
+      <button onClick={()=>setColor("brown")}>brown</button>
+      <button onClick={()=>setColor("pink")}>pink</button>
+    </div>
+  )
+}
+
+//useEffect
+
+import React,{useEffect, useState} from 'react'
+import CWumount from './components/CWumount';
+
+export default function App() {
+  const [count,setCount] = useState(0);
+  const [allow,setAllow] = useState(true)
+  useEffect(()=>{
+    console.log('useEffect')
+  })
+  function handleIncrement(){
+    setCount(count+1)
+  }
+  return (
+    <div>
+      <h1>{count}</h1>
+      {allow && <CWumount/>}
+      <button onClick={()=>setAllow(!allow)}>Remove</button>
+      <button onClick={handleIncrement}>Increment by 1</button>
+    </div>
+  )
+}
+//useEffect intro 
+
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(10)
+  useEffect(()=>{
+    console.log('useEffect')
+  },[count,number]);
+  function handleIncrement(){
+    setCount(count+1)
+  }
+  function handleDecrement(){
+    setNumber(number-1)
+  }
+  return (
+    <div>
+      <h1>count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+      <h1>Number: {number}</h1>
+      <button onClick={handleDecrement}>Decrement</button>
+    </div>
+  )
+}
+//cleanup function-1
+
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  useEffect(()=>{
+    console.log('useEffect')
+    let fun =()=>{
+      console.log("adfar")
+    }
+    document.addEventListener("click",fun)
+    return ()=>{
+      document.removeEventListener("click",fun)
+    }
+  })
+  function handleIncrement(){
+    setCount(count+1)
+  }
+  return (
+    <div>
+      <h1>count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  )
+}
+
+//cleanup function-2
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [date,setDate]= useState(0)
+  useEffect(()=>{
+    console.log('useEffect')
+    var interval =setInterval(()=>{
+      console.log("timer")
+    },2000)
+    return ()=>{
+      clearInterval(interval)
+    }
+  })
+  function handleIncrement(){
+    setCount(count+1)
+  }
+  return (
+    <div>
+      <h1>count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  )
+}
+
+//date
+
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [date,setDate]= useState(0)
+  useEffect(()=>{
+    console.log('useEffect')
+    setInterval(()=>{
+      setDate(new Date())
+    },1000)
+    
+  })
+  function handleIncrement(){
+    setCount(count+1)
+  }
+  return (
+    <div>
+      <h1>{date.toLocaleString()}</h1>
+      <h1>count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  )
+}
+

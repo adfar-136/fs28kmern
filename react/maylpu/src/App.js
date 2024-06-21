@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
-import Demo from './components/classbasedcomponents/Demo'
-
-export default function App() {
-  const [color,setColor] =useState("gray")
+import { useReducer } from "react"
+const reducer = (state,action)=>{
+  console.log(state,action)
+  if(action.type === 'one'){
+    return {count:state.count+1}
+  } else if(action.type === 'two'){
+    return {count:state.count+2}
+  }
+  return state
+}
+export default function App(){
+  const [state,dispatch]= useReducer(reducer,{count:0})
   return (
     <div>
-      <Demo fName="Adfar" lname="rashed" color={color}/>
-      <button onClick={()=>setColor("blue")}>blue</button>
-      <button onClick={()=>setColor("orange")}>orange</button>
-      <button onClick={()=>setColor("brown")}>brown</button>
-      <button onClick={()=>setColor("pink")}>pink</button>
+       <h1>{state.count}</h1>
+       <button onClick={()=>dispatch({type:"one"})}>Increment 1</button>
+       <button onClick={()=>dispatch({type:"two"})}>Increment 2</button>
+       <button onClick={()=>dispatch({type:"three"})}>Increment 3</button>
     </div>
   )
 }
