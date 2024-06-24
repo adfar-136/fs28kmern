@@ -433,3 +433,55 @@ export default function App() {
   )
 }
 
+//usereducdr 
+import { useReducer } from "react"
+const reducer = (state,action)=>{
+  console.log(state,action)
+  if(action.type === 'one'){
+    return {count:state.count+1}
+  } else if(action.type === 'two'){
+    return {count:state.count+2}
+  }
+  return state
+}
+export default function App(){
+  const [state,dispatch]= useReducer(reducer,{count:0})
+  return (
+    <div>
+       <h1>{state.count}</h1>
+       <button onClick={()=>dispatch({type:"one"})}>Increment 1</button>
+       <button onClick={()=>dispatch({type:"two"})}>Increment 2</button>
+       <button onClick={()=>dispatch({type:"three"})}>Increment 3</button>
+    </div>
+  )
+}
+
+//usereducer 2
+import React, { useReducer } from 'react'
+function reducer(state,action){
+ switch(action.type){
+  case "red":
+    return {background:"red",count:state.count+action.payload};
+    case "green":
+      return {background:"green",count:state.count-action.payload};
+      case "pink":
+        return {background:"pink",count:state.count+action.payload};
+        case "blue":
+    return {background:"blue",count:state.count-action.payload};
+  default:
+    return state
+ }
+}
+export default function App() {
+  const [state,dispatch] =useReducer(reducer,{background:"gray",count:0})
+  return (
+    <div style={{width:"300px",backgroundColor:state.background,height:"300px",border:"red solid 3px"}}>
+      <h1>Hello World!</h1>
+      <h1>{state.count}</h1>
+      <button onClick={()=>dispatch({type:"red",payload:10})}>Red + 10</button>
+      <button onClick={()=>dispatch({type:"green",payload:20})}>Green-20</button>
+      <button onClick={()=>dispatch({type:"pink",payload:20})}>Pink+20</button>
+      <button onClick={()=>dispatch({type:"blue",payload:10})}>Blue-10</button>
+    </div>
+  )
+}
