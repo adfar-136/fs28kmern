@@ -1,0 +1,28 @@
+.container1{
+    background-color: burlywood;
+    padding: 30px;
+    border-radius: 25px;
+}
+.heading1{
+    font-size: 40px;
+    color: #da0d0d;
+}
+#main{
+    background-color: #da0d0d;
+    padding: 20px;
+}
+.main{
+    background-color: brown;
+}
+#main .para{
+  color: blue;
+}
+.myContainer{
+    color: pink;
+}
+.my_main{
+    color: blue;
+}
+.my-section{
+    color: green;
+}

@@ -485,3 +485,55 @@ export default function App() {
     </div>
   )
 }
+
+
+/react-router-dom
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './components/react router/Home'
+import Aboutt from './components/react router/Aboutt'
+import Blog from './components/react router/Blog'
+import Contact from './components/react router/Contact'
+import Shop from './components/react router/Shop'
+import Adfar from './components/react router/Adfar'
+import Pomodoro from './components/Pomodoro'
+
+import User from './components/react router/User'
+import UserDetails from './components/react router/UserDetails'
+import Phone from './components/react router/Phone'
+import Numbers from './components/react router/Numbers'
+import Company from './components/react router/Company'
+import Ceo from './components/react router/Ceo'
+import Manager from './components/react router/Manager'
+import Mainhome from './components/react router/Mainhome'
+
+export default function App() {
+  return (
+    <div>
+      
+      <BrowserRouter>
+      
+        <Routes>
+          <Route path='/' element={<Mainhome/>}>
+            <Route index element={<Home/>} />
+            <Route path='/about' element={<Aboutt/>}/>
+            <Route path='/contact' element={<Contact/>}>
+              <Route path='company' element={<Company/>}/>
+              <Route path='ceo' element={<Ceo/>}/>
+              <Route path='manager' element={<Manager/>}/>
+            </Route>
+            <Route path='/blog' element={<Blog/>}/>
+            <Route path='/shop' element={<Shop/>}/>
+            <Route path='/user' element={<User/>}/>
+            <Route path='/user/:userid' element={<UserDetails/>}/>
+            <Route path='/user/:userid/phone' element={<Phone/>}/>
+            <Route path='/user/:userid/phone/:no' element={<Numbers/>}/>
+            <Route path='/adfar' element={<Adfar/>}/>
+
+            <Route path='/pomodoro' element={<Pomodoro/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  )
+}
