@@ -537,3 +537,23 @@ export default function App() {
     </div>
   )
 }
+
+//context api 
+import React, { createContext } from 'react'
+import Component1 from './components/contextAPI/Component1'
+const myContext = createContext();
+const lastName = createContext();
+export default function App() {
+  return (
+    <div>
+      <myContext.Provider value="Adfar">
+        <lastName.Provider value="Rasheed">
+            <Component1/>
+        </lastName.Provider>
+        
+      </myContext.Provider>
+      
+    </div>
+  )
+}
+export {myContext,lastName}

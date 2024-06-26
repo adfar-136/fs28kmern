@@ -1,15 +1,16 @@
 import React from 'react'
-import File1 from './components/CSSModules/File1'
-import File2 from './components/CSSModules/File2'
-import File3 from './components/CSSModules/File3'
+import StateProvider from './components/contextAPI/StateProvider'
+import TodoContext from './components/todo/TodoContext'
+import AddTodo from './components/todo/AddTodo'
+import TodoList from './components/todo/TodoList'
 
 export default function App() {
   return (
     <div>
-        <File3/>
-      <File1/>
-      <File2/>
-    
+      <TodoContext>
+        <AddTodo/>
+        <TodoList/>
+      </TodoContext>
     </div>
   )
 }
