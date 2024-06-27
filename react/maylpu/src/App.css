@@ -1,15 +1,8 @@
-.black{
+.dark{
     background-color: black;
+    color: white;
 }
-.red{
-    background-color: red;
-}
-.blue{
-    background-color: blue;
-}
-.pink{
-    background-color: pink;
-}
-.aqua{
-    background-color: aqua;
+.light{
+    background-color: white;
+    color: black;
 }

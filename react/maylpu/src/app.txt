@@ -575,3 +575,26 @@ export default function App() {
     </div>
   )
 }
+//usememo eg 1
+
+import React, { useMemo, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(100);
+  const isEven=useMemo(()=>{
+         let i=0
+         while(i<2000000000) i++;
+         return count%2===0
+        
+    },[count])
+  return (
+    <div>
+      <h1>Count : {count}</h1>
+      <button onClick={()=>setCount(count+1)}>Increment Count</button>
+      <h1>{isEven?"EVEN":"ODD"}</h1>
+      <h1>Number  : {number}</h1>
+      <button onClick={()=>setNumber(number-1)}>Decrement Number</button>
+    </div>
+  )
+}
