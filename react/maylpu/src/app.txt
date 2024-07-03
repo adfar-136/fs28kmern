@@ -750,4 +750,52 @@ export default function App() {
     </div>
   )
 }
+//Errorboundary
+
+import React from 'react'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import Counter from './components/ErrorBoundary/Counter'
+
+
+export default function App() {
+  return (
+    <div>
+      <ErrorBoundary>
+        <Counter/>
+        <Counter/>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Counter/>
+      </ErrorBoundary>
+      <Counter/>
+    
+      <h1>Hello Adfar</h1>
+    </div>
+  )
+}
+
+
+//redux
+
+import React from 'react'
+import Counterredux from './Counterredux'
+import Tdoredux from './Tdoredux'
+import { setBackgroundColor } from './Reduxstore/action'
+import { useDispatch, useSelector } from 'react-redux'
+export default function App() {
+  const color = useSelector((state)=>state.color)
+  const dispatch = useDispatch()
+  console.log(color)
+    return (
+    <div style={{backgroundColor:color.backgroundColor}}>
+      <Tdoredux/>
+      <Counterredux/>
+      <button onClick={()=>dispatch(setBackgroundColor("blue"))}>Blue</button>
+      <button onClick={()=>dispatch(setBackgroundColor("green"))}>Green</button>
+      <button onClick={()=>dispatch(setBackgroundColor("yellow"))}>yellow</button>
+      <button onClick={()=>dispatch(setBackgroundColor("pink"))}>pink</button>
+    </div>
+  )
+}
+
 
