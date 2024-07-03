@@ -10,9 +10,9 @@ export default function App() {
   const [page,setPage] = useState(1)
   const [articles,setArticles] = useState([])
   const [favorites,setFavorites] = useState([])
-  useEffect(()=>{
-    fetchArticles(query,page)
-  },[query,page])
+  // useEffect(()=>{
+  //   fetchArticles(query,page)
+  // },[query,page])
   useEffect(()=>{
     const favArticles= JSON.parse(localStorage.getItem('favorites'))
     setFavorites(favArticles)

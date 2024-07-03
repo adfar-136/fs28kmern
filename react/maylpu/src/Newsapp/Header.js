@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 export default function Header({setQuery,fetchArticles}) {
     const [text,setText] = useState("")
-    useEffect(()=>{
-      if(text.length > 0){
-        fetchArticles(text,1)
-      }
-    },[text,fetchArticles])
+    // useEffect(()=>{
+    //   if(text.length > 0){
+    //     fetchArticles(text,1)
+    //   }
+    // },[text,fetchArticles])
     const handleSubmit=(e)=>{
        e.preventDefault()
        setQuery(text)
