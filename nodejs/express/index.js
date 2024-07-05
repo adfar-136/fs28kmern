@@ -1,25 +1,23 @@
-var express = require("express")
+var userRouter = require("./Routes/userRouter")
+var express = require("express");
 var app = express()
-app.get("/",(req,res)=>{
-  res.send("Welcome to express")
+// var userRouter = express.Router()
+var adminRouter = express.Router()
+// userRouter.use((req,res,next)=>{
+//   console.log('Time :' ,Date.now())
+//   next()
+// })
+// userRouter.get("/user",(req,res)=>{
+//   res.send("user")
+// })
+// userRouter.get("/contact",()=>{
+//   res.send("contact")
+// })
+adminRouter.get("/dashboard",(req,res)=>{
+  res.send("dashboard")
 })
-app.get("/about",(req,res)=>{
-    
-    res.write("<h1>Some random text</h1>")
-    res.write("<h1>Some random text</h1>")
-    res.write("<h1>Some random text</h1>")
-    res.write("<h1>Some random text</h1>")
-    res.write("<h1>Some random text</h1>")
-    res.send()
-})
-app.get("/contact",(req,res)=>{
-  res.send("sghhjk")
-})
-app.get("/api",(req,res)=>{
-   console.log(req)
-   console.log(res)
-   res.json("defrdfrf")
-})
+app.use("/api",userRouter)
+app.use("/admin",adminRouter)
 app.listen(3001,()=>{
-    console.log("Server is running on port 3001")
+  console.log("server is running on port 3001")
 })

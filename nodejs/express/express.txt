@@ -1,0 +1,54 @@
+//first express code
+var express = require("express")
+var app = express()
+app.get("/",(req,res)=>{
+  res.send("Welcome to express")
+})
+app.get("/about",(req,res)=>{
+    res.write("<h1>Some random text</h1>")
+    res.write("<h1>Some random text</h1>")
+    res.write("<h1>Some random text</h1>")
+    res.write("<h1>Some random text</h1>")
+    res.write("<h1>Some random text</h1>")
+    res.send()
+})
+app.get("/contact",(req,res)=>{
+  res.send("sghhjk")
+})
+app.get("/api",(req,res)=>{
+   console.log(req)
+   console.log(res)
+   res.json("defrdfrf")
+})
+app.listen(3001,()=>{
+    console.log("Server is running on port 3001")
+})
+
+const { timeStamp } = require("console")
+var express = require("express")
+var fs = require("fs")
+var path = require("path")
+var app = express()
+const staticPath = path.join(__dirname,"public")
+console.log(staticPath)
+app.use(express.static(staticPath))
+app.get("/",(req,res)=>{
+  res.sendFile(path.join(__dirname,"public","index.html"))
+})
+app.get("/about",(req,res)=>{
+  res.sendFile(path.join(__dirname,"public","about.html"))
+})
+app.get("/about/contact",(req,res)=>{
+  res.sendFile(path.join(__dirname,"public","contact.html"))
+})
+app.get("/api/data",(req,res)=>{
+  const data = {
+    name:"Rahul",
+    message:"hello Adfar",
+    timeStamp: Date.now()
+  }
+  res.json(data)
+})
+app.listen(3000,()=>{
+  console.log("server is running")
+})
