@@ -52,3 +52,59 @@ app.get("/api/data",(req,res)=>{
 app.listen(3000,()=>{
   console.log("server is running")
 })
+
+//routes 
+var userRouter = require("./Routes/userRouter")
+var express = require("express");
+var app = express()
+// var userRouter = express.Router()
+var adminRouter = express.Router()
+// userRouter.use((req,res,next)=>{
+//   console.log('Time :' ,Date.now())
+//   next()
+// })
+// userRouter.get("/user",(req,res)=>{
+//   res.send("user")
+// })
+// userRouter.get("/contact",()=>{
+//   res.send("contact")
+// })
+adminRouter.get("/dashboard",(req,res)=>{
+  res.send("dashboard")
+})
+app.use("/api",userRouter)
+app.use("/admin",adminRouter)
+app.listen(3001,()=>{
+  console.log("server is running on port 3001")
+})
+
+//ejs templating engines
+
+app.set("view engine","ejs")
+app.get("/",(req,res)=>{
+  res.render("index",{
+    name:"Adfar Rasheeeeeed",
+    age: 21,
+  })
+})
+app.get("/home",(req,res)=>{
+  res.render("home")
+})
+
+var express =require("express")
+var app = express()
+app.set("view engine","hbs")
+var data = {
+  name:"Rahul",
+  age: 20,
+  skills:["HTML","CSS","JS","REACT"]
+}
+app.get("/",(req,res)=>{
+  res.render("index",{
+    data:data
+  })
+  
+})
+app.listen(3001,()=>{
+  console.log("server is running on port 3001")
+})
