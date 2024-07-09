@@ -1,11 +1,15 @@
 var express = require("express")
 var app = express()
+var cors = require("cors")
 // var bodyParser = require("body-parser")
 var studentArray = require("./initialData")
 let currentid = studentArray.length
 app.use(express.json())
+app.use(cors(
+    {origin:'http://localhost:3000'}
+))
 // app.use(bodyParser.urlencoded({ extended: true }))
-app.get("/api",(req,res)=>{
+app.get("/api/student",(req,res)=>{
   res.send(studentArray)
 })
 app.get("/api/student/:id",(req,res)=>{
