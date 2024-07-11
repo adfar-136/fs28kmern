@@ -1,110 +1,46 @@
-var express = require("express")
-var app = express()
-var cors = require("cors")
-// var bodyParser = require("body-parser")
-var studentArray = require("./initialData")
-let currentid = studentArray.length
-app.use(express.json())
-app.use(cors(
-    {origin:'http://localhost:3000'}
-))
-// app.use(bodyParser.urlencoded({ extended: true }))
-app.get("/api/student",(req,res)=>{
-  res.send(studentArray)
+const express = require("express")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const User = require("./models/User")
+const bodyParser = require("body-parser")
+const bcrypt = require("bcryptjs")
+const Registration = require("./models/Event")
+const app = express()
+app.use(cors())
+app.use(bodyParser.json())
+console.log(bcrypt)
+mongoose.connect("mongodb://localhost:27017/register").then(()=>{
+  console.log("connected to database")
 })
-app.get("/api/student/:id",(req,res)=>{
-  let id = req.params.id;
-  if(!isNaN(id)){
-    id = parseInt(id)
-    let studentObject = studentArray.find((item)=>{
-      return (item.id===id)
-    })
-    if(studentObject === undefined){
-      res.sendStatus(404)
-    }
-    res.send(studentObject)
-  } else {
-    return res.sendStatus(400)
+app.post("/register",async (req,res)=>{
+   const {username,email,password} = req.body
+   const hashedPassword =await bcrypt.hash(password, 10)
+   const newUser = new User({
+    username,
+    email,
+    password: hashedPassword
+   })
+   await newUser.save()
+  res.json("User registered successfully")
+})
+app.post("/register-event",(req,res)=>{
+  const {username,event,date} = req.body;
+  const newRegistration =  new Registration({username,event,date})
+  newRegistration.save()
+  res.json("Event registered successfully")
+})
+app.post("/login",async (req,res)=>{
+  const {email,password} = req.body;
+  const user = await User.findOne({email})
+  if(!user){
+    return res.status(400).send({message:"User not found"})
   }
-})
-app.post("/api/student/",(req,res)=>{
-  let reqkeys =Object.keys(req.body)
-  if(reqkeys.find((e)=>{return e==="name"}) && reqkeys.find((e)=>{return e === "currentClass"})
-    && reqkeys.find((e)=>{return e === "division"})){
-      if(!isNaN(req.body.currentClass)){
-        let name = req.body.name;
-        let currentClass = req.body.currentClass;
-        let division = req.body.division;
-        currentid++;
-        studentArray.push({id:currentid,name:name,currentClass:currentClass,division:division})
-        res.send(studentArray)
-      } else {
-        return res.sendStatus(400)
-      }
-  } else {
-    res.sendStatus(400)
+  const isMatch= await bcrypt.compare(password,user.password)
+  if(!isMatch){
+    return res.status(400).send({message:"Invalid password"})
   }
+  res.json({message:"Login successful",email:user.email})
 })
-app.put("/api/student/:id",(req,res)=>{
-  if(!isNaN(req.params.id)){
-    let id = parseInt(req.params.id);
-    let oldObj = studentArray.find((item)=>{
-      return (item.id===id)
-    })
-    if(oldObj === undefined){
-      res.sendStatus(404)
-    } else{
-      let newObj = req.body
-      let studentObj= {...oldObj,...newObj}
-      let index =studentArray.indexOf(oldObj)
-      studentArray.splice(index,1)
-      studentArray.push(studentObj)
-      res.send(studentArray)
-    }
-  }
+app.listen(5000,()=>{
+  console.log("Server is running on port 5000")
 })
-app.delete("/api/student/:id",(req,res)=>{
-  if(!isNaN(req.params.id)){
-    let id = parseInt(req.params.id);
-    let stuobj =studentArray.find((item)=>{
-      return item.id === id
-    })
-
-    if(stuobj !== undefined){
-       let index = studentArray.indexOf(stuobj)
-       studentArray.splice(index,1)
-       res.send(200)
-    } else{
-      return res.sendStatus(404)
-    }
-
-}
-else {
-  return res.sendStatus(400)
-}
-})
-app.listen(8000,()=>{
-  console.log("server is running on port 8000")
-})
-
-
-// var express = require("express")
-// var app = express()
-// var cors =require("cors")
-// app.use(cors(
-//     {origin:'http://localhost:3001'}
-// ))
-
-// app.get("/",(req,res)=>{
-//     res.json({
-//         message:"Welcome Hero",
-//         name:"Adfar Rasheed",
-//         age: 20,
-//         gender: "Male",
-//         city:"srinagar"
-//     })
-// })
-
-// app.listen(3000,()=>{
-//     console.log("server is running on port 3000")
-// })
