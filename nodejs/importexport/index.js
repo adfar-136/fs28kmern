@@ -1,0 +1,6 @@
+var f = require("./usermodule")
+console.log(f)
+var result = f.add(4,5)
+console.log(result)
+var reult1= f.sub(5,6)
+console.log(reult1)

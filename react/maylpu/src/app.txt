@@ -557,3 +557,245 @@ export default function App() {
   )
 }
 export {myContext,lastName}
+
+
+import React from 'react'
+import StateProvider from './components/contextAPI/StateProvider'
+import TodoContext from './components/todo/TodoContext'
+import AddTodo from './components/todo/AddTodo'
+import TodoList from './components/todo/TodoList'
+
+export default function App() {
+  return (
+    <div>
+      <TodoContext>
+        <AddTodo/>
+        <TodoList/>
+      </TodoContext>
+    </div>
+  )
+}
+//usememo eg 1
+
+import React, { useMemo, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(100);
+  const isEven=useMemo(()=>{
+         let i=0
+         while(i<2000000000) i++;
+         return count%2===0
+        
+    },[count])
+  return (
+    <div>
+      <h1>Count : {count}</h1>
+      <button onClick={()=>setCount(count+1)}>Increment Count</button>
+      <h1>{isEven?"EVEN":"ODD"}</h1>
+      <h1>Number  : {number}</h1>
+      <button onClick={()=>setNumber(number-1)}>Decrement Number</button>
+    </div>
+  )
+}
+
+
+//useMemo 
+import React, { useState } from 'react'
+import TodoList from './components/memo/TodoList'
+import { createTodos } from './components/memo/utils'
+import "./App.css"
+let todos = createTodos()
+export default function App() {
+const [tab,setTab] = useState("all")
+const [isDark,setIsDark] = useState(false)
+  return (
+    <div>
+      <button onClick={()=>setTab("all")}>All</button>
+      <button onClick={()=>setTab("active")}>Active</button>
+      <button onClick={()=>setTab("completed")}>Completed</button>
+      <br />
+      <label>
+        <input type="checkbox" value="" 
+        onChange={(e)=>setIsDark(e.target.checked)}/>
+        Dark Mode
+      </label>
+      <TodoList
+       todos = {todos}
+       tab = {tab}
+       theme = {isDark ?  "dark" : "light"}
+      />
+    </div>
+  )
+}
+
+
+/memo fails 
+
+import React, { useCallback, useState } from 'react'
+import Children from './Children'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+ function handleClick(){
+  setCount(count+1)
+ }
+ const fun = useCallback(()=>{
+  console.log("adfarrr")
+ },[])
+ console.log("parent")
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={handleClick}>Increment</button>
+      <Children fun={fun}/>
+    </div>
+  )
+}
+
+
+//usecallback 
+
+import React, { useCallback, useState } from 'react'
+const x = new Set()
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(10)
+  const incrementCount = useCallback(()=>{
+    setCount(count+1)
+  },[count])
+  const decrementCount = useCallback(()=>{
+    setCount(count-1)
+  },[count])
+  const incrementNumber = useCallback(()=>{
+    setNumber(number+1)
+  },[number])
+  const decrementNumber = useCallback(()=>{
+    setNumber(number-1)
+  },[number])
+  x.add(incrementCount)
+  x.add(decrementCount)
+  x.add(incrementNumber)
+  x.add(decrementNumber)
+  console.log(x)
+  alert(x.size)
+  return (
+    <div>
+      <h1>Count:{count}</h1>
+      <button onClick={incrementCount}>Increment Count</button>
+      <button onClick={decrementCount}>Decrement Count</button>
+      <h2>Number : {number}</h2>
+      <button onClick={incrementNumber}>Increment Number</button>
+      <button onClick={decrementNumber}>Decrement Number</button>
+    </div>
+  )
+}
+
+
+import React from 'react'
+import Counter from './components/customHooks/Counter'
+import Like from './components/customHooks/Like'
+import Unlike from './components/customHooks/Unlike'
+import Todoo from './components/customHooks/Todoo'
+
+export default function App() {
+  return (
+    <div>
+      <Todoo/>
+      <Counter/>
+      <Like/>
+      <Unlike></Unlike>
+    </div>
+  )
+}
+
+//createPortals
+
+import React, { useState } from 'react'
+import Modal from './components/Modal'
+
+export default function App() {
+  const [condition,setCondition] = useState(false)
+  return (
+    <div>
+      <h1>This is a modal component</h1>
+      <button onClick={()=>setCondition(true)}>Show Modal</button>
+      <Modal condition={condition}>
+        <h1>Modal</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex exercitationem omnis dicta ducimus explicabo iste iure odit nihil cum molestiae!</p>
+      </Modal>
+    </div>
+  )
+}
+
+
+//lazyloading
+
+import React, { Suspense, lazy } from 'react'
+import Importatcom from './components/lazyloading/Importatcom';
+const Component1 = lazy(()=>import("./components/lazyloading/Component1.js"))
+const Component2 = lazy(()=>import("./components/lazyloading/Component2.js"))
+
+export default function App() {
+  return (
+    <div>
+     <Importatcom/>
+     <Suspense fallback={<div>Please wait......</div>}>
+        <Component1/>
+     </Suspense>
+     <Suspense fallback={<h1>Sabr rakhiyai....</h1>}>
+      <Component2/>
+     </Suspense>
+      {/* <Component2/>  */}
+    </div>
+  )
+}
+//Errorboundary
+
+import React from 'react'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import Counter from './components/ErrorBoundary/Counter'
+
+
+export default function App() {
+  return (
+    <div>
+      <ErrorBoundary>
+        <Counter/>
+        <Counter/>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Counter/>
+      </ErrorBoundary>
+      <Counter/>
+    
+      <h1>Hello Adfar</h1>
+    </div>
+  )
+}
+
+
+//redux
+
+import React from 'react'
+import Counterredux from './Counterredux'
+import Tdoredux from './Tdoredux'
+import { setBackgroundColor } from './Reduxstore/action'
+import { useDispatch, useSelector } from 'react-redux'
+export default function App() {
+  const color = useSelector((state)=>state.color)
+  const dispatch = useDispatch()
+  console.log(color)
+    return (
+    <div style={{backgroundColor:color.backgroundColor}}>
+      <Tdoredux/>
+      <Counterredux/>
+      <button onClick={()=>dispatch(setBackgroundColor("blue"))}>Blue</button>
+      <button onClick={()=>dispatch(setBackgroundColor("green"))}>Green</button>
+      <button onClick={()=>dispatch(setBackgroundColor("yellow"))}>yellow</button>
+      <button onClick={()=>dispatch(setBackgroundColor("pink"))}>pink</button>
+    </div>
+  )
+}
+
+
