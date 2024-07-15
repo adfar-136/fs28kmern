@@ -6,6 +6,7 @@ export default function Login() {
     const [password,setPassword] = useState("")
     const [error,setError] = useState("")
     const navigate = useNavigate()
+    Axios.defaults.withCredentials = true
     const handleSubmit = (e) => {
         e.preventDefault()
         if(!email || !password){
